@@ -1,0 +1,8 @@
+[Unit]
+Description=Set random wallpaper with Matugen
+Wants=graphical.target
+After=graphical.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/kapil/.config/matugen/random_wall.sh

@@ -1,0 +1,88 @@
+// See `rofi -dump-config` for current config
+
+configuration {
+    modes: "drun,calc,run,window";
+	show-icons:      true;
+	sidebar-mode:    true;
+    drun {
+	    display-name:    " ";
+    }
+    run {
+	    display-name:     "";
+    }
+    window {
+	    display-name:  "";
+    }
+    // github.com/svenstaro/rofi-calc
+    calc {
+        display-name: "󱖦";
+    }
+}
+
+// See `rofi -dump-theme` for currently applied theme
+// See docs
+* {
+    background-color: transparent;
+    // background: #282c34d0;
+    background: transparent; 
+    foreground: White;
+    normal-background: var(background);
+    normal-foreground: var(foreground);
+    active-background: var(background);
+    active-foreground: var(foreground);
+    alternate-normal-background: var(background);
+    alternate-normal-foregound: var(foreground);
+    alternate-active-foreground: var(foreground);
+    alternate-active-background: var(background);
+    selected-active-background: var(selected-normal-background);
+    selected-active-foreground: var(selected-normal-foreground);
+    text-color:       White;
+    spacing:          30;
+}
+
+#window {
+    fullscreen: true;
+    transparency: "background";
+
+    background-color: #282c34d0;
+
+    // Add dummy widgets on top and bottom so the sizing
+    // nicely centers hdum, independent of resolution.
+    children: [ dummy1, hdum, dummy2 ];
+}
+
+dummy1 {
+    expand: true;
+}
+dummy2 {
+    expand: true;
+}
+
+#hdum {
+    orientation: horizontal;
+    // Add dummy widgets on left and right so the sizing
+    // nicely centers mainbox, independent of resolution.
+    expand: false;
+    children: [ dummy3, mainbox, dummy4 ];
+}
+
+mainbox {
+    children: [inputbar, message, listview, mode-switcher];
+}
+
+inputbar {
+    children: [entry, num-filtered-rows, textbox-num-sep, num-rows];
+}
+listview {
+    dynamic: false;
+    border: none;
+    fixed-height: true;
+    lines: 7;
+    scrollbar: false;
+}
+
+element {
+    padding: 3px;
+    background-color: var(background);
+    text-color: var(foreground);
+}

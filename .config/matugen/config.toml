@@ -1,0 +1,24 @@
+[config.wallpaper]
+command = "swww"
+arguments = ["img", "--transition-type", "none"]
+set = true
+
+
+[templates.waybar]
+input_path = './templates/colors.css'
+output_path = '~/.config/waybar/colors.css'
+post_hook = 'pkill -SIGUSR2 waybar'
+
+[templates.hyprland]
+input_path = './templates/hyprland-colors.conf'
+output_path = '~/.config/hypr/colors.conf'
+post_hook = 'hyprctl reload'
+
+[templates.swaync]
+input_path = './templates/colors.css'
+output_path = '~/.config/swaync/colors.css'
+post_hook = 'swaync-client -rs'
+
+[templates.yazi]
+input_path = './templates/yazi-theme.toml'
+output_path = '~/.config/yazi/theme.toml'
