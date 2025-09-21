@@ -25,7 +25,7 @@ return {
         -- MASON SETUP
         require('mason').setup()
         require('mason-lspconfig').setup({
-            ensure_installed = { 'lua_ls', 'clangd', 'pylsp', 'gopls', 'jsonls' },
+            ensure_installed = { 'lua_ls', 'clangd', 'pylsp', 'gopls', 'goimports', 'jsonls' },
             automatic_enable = {
                 -- We are setting them on our own
                 exclude = {
@@ -104,6 +104,7 @@ return {
                         unusedvariable = true,
                         unusedparams = true,
                     },
+                    completeUnimported = true,
                     staticcheck = true,
                     gofumpt = true,
                     usePlaceholders = true,
@@ -116,8 +117,25 @@ return {
                         group = vim.api.nvim_create_augroup("GoFormat", { clear = true }),
                         buffer = bufnr,
                         callback = function()
+                            -- organize imports
+                            local params = vim.lsp.util.make_range_params()
+                            params.context = { only = { "source.organizeImports" } }
+
+                            local result = vim.lsp.buf_request_sync(bufnr, "textDocument/codeAction", params, 3000)
+                            if result then
+                                for cid, res in pairs(result) do
+                                    for _, r in pairs(res.result or {}) do
+                                        if r.edit then
+                                            local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+                                            vim.lsp.util.apply_workspace_edit(r.edit, enc)
+                                        end
+                                    end
+                                end
+                            end
+
+                            -- Format
                             vim.lsp.buf.format({ bufnr = bufnr })
-                        end,
+                        end
                     })
                 end
             end,
