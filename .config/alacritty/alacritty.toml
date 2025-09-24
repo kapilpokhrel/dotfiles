@@ -1,0 +1,47 @@
+[general]
+import = [ "~/.config/alacritty/themes/rose-pine.toml" ]
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "JetBrainsMono"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono"
+style = "Italic"
+
+[font.bold_italic]
+family = "JetBrainsMono"
+style = "Bold Italic"
+
+[cursor]
+style.shape = "Beam"
+thickness = 0.25
+
+[window]
+opacity = 0.85
+dynamic_title = true
+startup_mode = "Windowed"
+
+[window.padding]
+x = 3
+y = 3
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[debug]
+render_timer = false
+persistent_logging = false
+log_level = "Warn"
+print_events = false
