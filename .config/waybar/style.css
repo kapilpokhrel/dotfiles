@@ -11,7 +11,7 @@
 
 window#waybar {
     background-color: @tertiary_container_a6;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 2px solid @tertiary_container_a9;
 }
 
@@ -28,6 +28,7 @@ window#waybar.hidden {
 /* === Workspaces === */
 #workspaces {
     background-color: @secondary_container_a3;
+    padding: 0px 3px;
 }
 
 #workspaces button {
@@ -56,16 +57,15 @@ window#waybar.hidden {
 
 /* === Clock (center) === */
 .modules-center {
-    margin: 4px;
+    margin: 0px;
     border-radius: 6px;
-    /*border: 1px solid @on_surface_a;*/
 }
 
 #clock {
-    /*background-color: @surface_container_high_a;*/
     margin: 0px;
     padding: 0px 10px;
     color: @on_surface;
+    font-size: 17px;
 }
 
 /* === Right Side Grouping === */

@@ -118,7 +118,7 @@
         "format-linked": "  {ifname} (No IP)",
         "format-disconnected": "󰤭",
         "format-alt": "{ipaddr}/{cidr}",
-        "on-click-right": "kitty nmtui",
+        "on-click-right": "alacritty --command nmtui",
         "max-length": 15
     },
     "pulseaudio": {
