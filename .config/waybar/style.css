@@ -4,17 +4,15 @@
     font-family: Ubuntu Nerd Font, Canterell, FontAwesome, monospace;
     font-size: 14px;
     border: none;
-    border-radius: 8px;
     padding: 0;
     margin: 0;
     min-height: 0;
 }
 
 window#waybar {
-    background-color: rgba(30, 30, 46, 0.65);
-    border-radius: 12px;
-    border: 2px solid @secondary_container;
-    color: @on_surface;
+    background-color: @tertiary_container_a6;
+    border-radius: 8px;
+    border: 2px solid @tertiary_container_a9;
 }
 
 window#waybar.hidden {
@@ -22,22 +20,23 @@ window#waybar.hidden {
 }
 
 .modules-left {
-    margin: 5px;
-    border: 1px solid @secondary_container;
+    margin: 4px;
+    border-radius: 6px;
+    border: 1px solid @on_surface_a5;
 }
 
 /* === Workspaces === */
 #workspaces {
-    background-color: rgba(30, 30, 46, 0.85);
+    background-color: @secondary_container_a3;
 }
 
 #workspaces button {
     all: unset;
-    color: @on_surface;
-    padding: 5px 5px;
+    color: @on_secondary_container;
+    padding: 2px 0px;
     margin: 3px;
     min-width: 0;
-    border-radius: 6px;
+    border-radius: 3px;
     background: transparent;
 }
 
@@ -52,34 +51,34 @@ window#waybar.hidden {
 }
 
 #workspaces button:hover {
-    background-color: @surface_variant;
     color: @primary;
 }
 
 /* === Clock (center) === */
 .modules-center {
-    margin: 5px;
-    border: 1px solid @secondary_container;
+    margin: 4px;
+    border-radius: 6px;
+    /*border: 1px solid @on_surface_a;*/
 }
 
 #clock {
-    background-color: rgba(30, 30, 46, 0.75);
-    padding: 5px 12px;
-    border-radius: 8px;
+    /*background-color: @surface_container_high_a;*/
+    margin: 0px;
+    padding: 0px 10px;
     color: @on_surface;
 }
 
 /* === Right Side Grouping === */
 .modules-right {
-    background-color: rgba(30, 30, 46, 0.75);
-    border: 1px solid @secondary_container;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 0 3px;
+    background-color: @secondary_container_a3;
+    border: 1px solid @on_surface_a5;
+    border-radius: 6px;
+    margin: 4px;
+    padding: 0px 3px;
 }
 
 .modules-right > widget {
-    margin: 0px 2px; /* Added margin to create space between modules */
+    margin: 0px 2px;
 }
 
 .modules-right > widget:first-child {
@@ -95,21 +94,25 @@ window#waybar.hidden {
 #custom-notif {
     padding: 6px 6px;
     background: transparent;
-    color: @on_surface;
+    color: @on_secondary_container;
     border: none;
+}
+
+#battery {
+    margin: 1px 2px;
 }
 
 /* Battery states */
 #battery.charging, #battery.plugged {
     background-color: @primary;
     color: @on_primary;
-    border-radius: 6px;
+    border-radius: 4px;
 }
 
 #battery.warning:not(.charging) {
     background-color: @error;
     color: @on_error;
-    border-radius: 6px;
+    border-radius: 4px;
 }
 
 #battery.critical:not(.charging) {
@@ -120,7 +123,7 @@ window#waybar.hidden {
     animation-timing-function: steps(3);
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    border-radius: 6px;
+    border-radius: 4px;
 }
 
 @keyframes blink {
@@ -140,7 +143,16 @@ window#waybar.hidden {
 }
 
 #tray menu {
+
+    border-radius: 6px;
+    background-color: @tertiary_container;
+    border: 2px solid @tertiary_container_a9;
     font-family: sans-serif;
+    padding: 5px;
+}
+
+#tray menu > * {
+    margin: 3px 0px;
 }
 
 /* Accessibility */

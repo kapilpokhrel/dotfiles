@@ -1,0 +1,16 @@
+/*
+* Css Colors
+* Generated with Matugen
+*/
+<* for name, value in colors *>
+    @define-color {{name}}_a9 {{value.default.rgba | set_alpha: 0.9 }};
+    @define-color {{name}}_a8 {{value.default.rgba | set_alpha: 0.8 }};
+    @define-color {{name}}_a7 {{value.default.rgba | set_alpha: 0.7 }};
+    @define-color {{name}}_a6 {{value.default.rgba | set_alpha: 0.6 }};
+    @define-color {{name}}_a5 {{value.default.rgba | set_alpha: 0.5 }};
+    @define-color {{name}}_a4 {{value.default.rgba | set_alpha: 0.4 }};
+    @define-color {{name}}_a3 {{value.default.rgba | set_alpha: 0.3 }};
+    @define-color {{name}}_a2 {{value.default.rgba | set_alpha: 0.2 }};
+    @define-color {{name}}_a1 {{value.default.rgba | set_alpha: 0.1 }};
+    @define-color {{name}} {{value.default.rgba | set_alpha: 1.0 }};
+<* endfor *>
