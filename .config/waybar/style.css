@@ -34,8 +34,8 @@ window#waybar.hidden {
 #workspaces button {
     all: unset;
     color: @on_secondary_container;
-    padding: 2px 0px;
-    margin: 3px;
+    padding: 2px 2px;
+    margin: 2px;
     min-width: 0;
     border-radius: 3px;
     background: transparent;
@@ -48,7 +48,7 @@ window#waybar.hidden {
 
 #workspaces button.urgent {
     background-color: @error_container;
-    color: @on_error;
+    color: @on_error_container;
 }
 
 #workspaces button:hover {
@@ -117,7 +117,7 @@ window#waybar.hidden {
 
 #battery.critical:not(.charging) {
     background-color: @error_container;
-    color: @on_surface;
+    color: @on_error_container;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: steps(3);

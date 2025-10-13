@@ -13,28 +13,23 @@ return {
         vim.opt.signcolumn = 'yes'
     end,
     config = function()
-        local lsp_defaults = require('lspconfig').util.default_config
+        -- local lsp_defaults = vim.lsp.config._default_config
 
-        -- Add cmp_nvim_lsp capabilities settings to lspconfig
-        -- This should be executed before you configure any language server
-        lsp_defaults.capabilities = vim.tbl_deep_extend(
-            'force',
-            lsp_defaults.capabilities,
-            require('cmp_nvim_lsp').default_capabilities()
-        )
+        -- -- Add cmp_nvim_lsp capabilities settings to lspconfig
+        -- -- This should be executed before you configure any language server
+        -- lsp_defaults.capabilities = vim.tbl_deep_extend(
+        --     'force',
+        --     lsp_defaults.capabilities,
+        --     require('cmp_nvim_lsp').default_capabilities()
+        -- )
+        vim.lsp.config('*', {
+            root_markers = { '.git' },
+            capabalities = require('cmp_nvim_lsp').default_capabilities()
+        })
         -- MASON SETUP
         require('mason').setup()
         require('mason-lspconfig').setup({
             ensure_installed = { 'lua_ls', 'clangd', 'pylsp', 'gopls', 'goimports', 'jsonls' },
-            automatic_enable = {
-                -- We are setting them on our own
-                exclude = {
-                    "pylsp",
-                    "lua_ls",
-                    "gopls",
-                    "clangd",
-                }
-            }
         })
 
         -- DIAGNOSTICS
@@ -76,15 +71,14 @@ return {
                 vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
                 vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
                 vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
-                vim.keymap.set({ 'n', 'x' }, '<F3>', function()
+                vim.keymap.set({ 'n', 'x', 'v' }, '<F3>', function()
                     vim.lsp.buf.format({ async = true })
                 end, opts)
                 vim.keymap.set('n', '<F4>', vim.lsp.buf.code_action, opts)
             end,
         })
 
-        local lspconfig = require('lspconfig')
-        lspconfig.lua_ls.setup({
+        vim.lsp.config.lua_ls = {
             settings = {
                 Lua = {
                     diagnostics = {
@@ -92,11 +86,11 @@ return {
                     },
                 },
             },
-        })
-        lspconfig.clangd.setup {
+        }
+        vim.lsp.config.clangd = {
             cmd = { "clangd", "--fallback-style=webkit" },
         }
-        lspconfig.gopls.setup {
+        vim.lsp.config.gopls = {
             settings = {
                 gopls = {
                     analyses = {
@@ -114,37 +108,37 @@ return {
                 -- Enable formatting on save for Go files
                 if client.name == "gopls" then
                     vim.api.nvim_create_autocmd("BufWritePre", {
-                        group = vim.api.nvim_create_augroup("GoFormat", { clear = true }),
-                        buffer = bufnr,
+                        pattern = "*.go",
                         callback = function()
-                            -- organize imports
                             local params = vim.lsp.util.make_range_params()
                             params.context = { only = { "source.organizeImports" } }
-
-                            local result = vim.lsp.buf_request_sync(bufnr, "textDocument/codeAction", params, 3000)
-                            if result then
-                                for cid, res in pairs(result) do
-                                    for _, r in pairs(res.result or {}) do
-                                        if r.edit then
-                                            local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
-                                            vim.lsp.util.apply_workspace_edit(r.edit, enc)
-                                        end
+                            local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+                            for cid, res in pairs(result or {}) do
+                                for _, r in pairs(res.result or {}) do
+                                    if r.edit then
+                                        local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+                                        vim.lsp.util.apply_workspace_edit(r.edit, enc)
                                     end
                                 end
                             end
-
-                            -- Format
-                            vim.lsp.buf.format({ bufnr = bufnr })
+                            vim.lsp.buf.format({ async = false })
                         end
                     })
                 end
             end,
         }
-        lspconfig.pylsp.setup {
+        vim.lsp.config.pylsp = {
             cmd = { "pylsp", "-vvv", "--log-file", "/tmp/lsp.log" },
             settings = {
                 pylsp = {
                     plugins = {
+                        pylsp_mypy = {
+                            enabled = true,
+                            live_mode = false,
+                            dmypy = true,
+                            report_progress = true,
+                            overrides = { "--check-untyped-defs", true }
+                        },
                         ruff = {
                             enabled = true,
                             formatEnabled = true,
@@ -156,7 +150,7 @@ return {
                             outputFormatr = "pylint",
 
                             -- Rules that are ignored when a pyproject.toml or ruff.toml is present:
-                            lineLength = 100,                                                      -- Line length to pass to ruff checking and formatting
+                            lineLength = 120,                                                      -- Line length to pass to ruff checking and formatting
                             indentWidth = 4,
                             exclude = { "__about__.py" },                                          -- Files to be excluded by ruff checking
                             select = { "A", "B", "E", "F", "T10", "SIM", "N", "W", "PLE", "PLR" }, -- Rules to be enabled by ruff

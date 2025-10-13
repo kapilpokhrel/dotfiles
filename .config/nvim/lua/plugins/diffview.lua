@@ -1,7 +1,6 @@
 return {
     "sindrets/diffview.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    lazy = true,
     config = function()
         require("diffview").setup({})
         vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { desc = "Open Git Diff" })
