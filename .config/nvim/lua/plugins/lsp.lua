@@ -154,7 +154,7 @@ return {
                             indentWidth = 4,
                             exclude = { "__about__.py" },                                          -- Files to be excluded by ruff checking
                             select = { "A", "B", "E", "F", "T10", "SIM", "N", "W", "PLE", "PLR" }, -- Rules to be enabled by ruff
-                            ignore = { "W293" },
+                            ignore = { "W293", "PLR2004" },
                             perFileIgnores = { ["__init__.py"] = "CPY001" },                       -- Rules that should be ignored for specific files
                             preview = false,                                                       -- Whether to enable the preview style linting and formatting.
                             targetVersion = "py310",                                               -- The minimum python version to target (applies for both linting and formatting).

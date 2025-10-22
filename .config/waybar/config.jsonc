@@ -87,7 +87,9 @@
             "",
             "",
             ""
-        ]
+        ],
+        "scroll-step": 0.5,
+        "min-brightness": 5
     },
     "battery": {
         "states": {
@@ -143,7 +145,8 @@
                 " "
             ]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "scroll-step": 0.5
     },
     "custom/power": {
         "format": "",
