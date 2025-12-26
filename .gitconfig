@@ -1,2 +1,4 @@
 [core]
 	excludesFile = /home/kapil/.gitignore_global
+[safe]
+	directory = /mnt/windows/Users/Kapil/Documents/nexRef
